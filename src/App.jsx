@@ -2,6 +2,7 @@ import { useState } from 'react';
 import TokenInput from './components/TokenInput';
 import TweetInput from './components/TweetInput';
 import LoadingSpinner from './components/LoadingSpinner';
+import ConversationView from './components/ConversationView';
 import { hasToken } from './services/tokenManager';
 import { parseThread } from './services/threadParser';
 import { recordRequest } from './services/rateLimiter';
@@ -77,23 +78,9 @@ function App() {
                 </div>
               )}
 
-              {/* Thread Display (placeholder for Phase 5) */}
+              {/* Thread Display */}
               {thread && !isLoading && (
-                <div className="bg-white rounded-lg shadow-md p-6">
-                  <h2 className="text-lg font-semibold text-gray-900 mb-4">
-                    Conversation ({thread.tweetCount} tweets)
-                  </h2>
-                  <div className="text-sm text-gray-600 space-y-1">
-                    <p>Conversation ID: {thread.conversationId}</p>
-                    <p>Root Tweet: {thread.rootTweetId}</p>
-                    <p>Focus Tweet: {thread.focusTweetId}</p>
-                  </div>
-                  <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-                    <p className="text-sm text-blue-800">
-                      <strong>Coming in Phase 5:</strong> Chat-like interface will display the conversation here
-                    </p>
-                  </div>
-                </div>
+                <ConversationView thread={thread} focusTweetId={thread.focusTweetId} />
               )}
 
               {/* Empty State */}
