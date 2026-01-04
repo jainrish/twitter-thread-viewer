@@ -33,6 +33,11 @@ function App() {
     }
   };
 
+  const handleClearConversation = () => {
+    setThread(null);
+    setError('');
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -57,7 +62,20 @@ function App() {
             <>
               {/* Tweet Input */}
               <div className="bg-white rounded-lg shadow-md p-6">
-                <TweetInput onSubmit={handleTweetSubmit} isLoading={isLoading} />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <TweetInput onSubmit={handleTweetSubmit} isLoading={isLoading} />
+                  </div>
+                  {thread && !isLoading && (
+                    <button
+                      onClick={handleClearConversation}
+                      className="mt-7 text-sm text-gray-600 hover:text-gray-900 underline whitespace-nowrap"
+                      title="Clear conversation"
+                    >
+                      Clear
+                    </button>
+                  )}
+                </div>
               </div>
 
               {/* Loading State */}
